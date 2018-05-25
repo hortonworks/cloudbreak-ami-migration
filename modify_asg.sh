@@ -23,9 +23,6 @@ do
     echo $region
     echo $original_ami_id
     echo $new_ami_id
-# TODO: 
-#   - prepare for empty array for lc-s and asg-s
-#   - LC creation name collision
 
     aws autoscaling describe-launch-configurations --region $region --profile $profile --query "LaunchConfigurations[?ImageId == '$original_ami_id']" | jq '. | .[].ImageId |= "'$new_ami_id'" | del(.[].KernelId, .[].RamdiskId, .[].LaunchConfigurationARN, .[].CreatedTime)' > launch_config_list.json
     jq -e '.[] | has("LaunchConfigurationName")' launch_config_list.json > /dev/null
