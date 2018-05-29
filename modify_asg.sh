@@ -12,8 +12,8 @@
 #     - Deletes the original LaunchConfiguration
 
 #env vars
-profile=poweruser
-input=aws-merged-images.yml
+profile=${AWS_PROFILE_NAME:-poweruser}
+input=${AWS_INPUT_FILE:-aws-merged-images.yml}
 
 while IFS=': ' read region original_ami_id new_ami_id 
 do
@@ -34,7 +34,7 @@ do
     for original_launch_config_name in $(jq -r '.[].LaunchConfigurationName' launch_config_list.json ) 
     do 
 
-        launch_config_name=$original_launch_config_name-COPY
+        launch_config_name=$original_launch_config_name-MIGRATED
         jq -r '.[] | select(.LaunchConfigurationName =="'$original_launch_config_name'")' launch_config_list.json > launch_config.json
         aws autoscaling create-launch-configuration --region $region  --profile $profile --launch-configuration-name $launch_config_name --cli-input-json file://launch_config.json
         

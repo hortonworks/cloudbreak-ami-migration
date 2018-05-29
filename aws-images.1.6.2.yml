@@ -1,0 +1,11 @@
+aws:
+  ap-northeast-1: ami-88dc2af7
+  ap-northeast-2: ami-67862e09
+  ap-southeast-1: ami-82eedffe
+  ap-southeast-2: ami-9cdd0cfe
+  eu-central-1: ami-907c527b
+  eu-west-1: ami-5be4d722
+  sa-east-1: ami-48cc9024
+  us-east-1: ami-dc0b9aa3
+  us-west-1: ami-81ffe6e1
+  us-west-2: ami-9c1568e4
